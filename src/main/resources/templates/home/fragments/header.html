@@ -1,81 +1,82 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+
+
 <header th:fragment="headerFragment" id="header" class="header-size-sm">
+    <script src="/js/function.js"></script>
     <div class="container">
         <div class="header-row">
+
             <!-- Logo
             ============================================= -->
             <div id="logo" class="mx-auto">
-                <a href="home.do" class="standard-logo" data-dark-logo="/images/test.jpg"><img
-                        src="/images/test.jpg" alt="Canvas Logo"></a>
-                <a href="home.do" class="retina-logo" data-dark-logo="/images/test.jpg"><img
-                        src="/images/test.jpg	" alt="Canvas Logo"></a>
+                <a th:href="@{/main}" class="standard-logo" data-dark-logo="/images/logo.png"><img
+                        src="/images/logo.png" alt="Logo"></a>
+                <a th:href="@{/main}" class="retina-logo" data-dark-logo="/images/logo.png"><img
+                        src="/images/logo.png" alt="Logo"></a>
             </div><!-- #logo end -->
+
         </div>
     </div>
     <div id="header-wrap" class="border-top border-f5">
         <div class="container">
             <div class="header-row justify-content-between top-search-parent">
                 <!-- login -->
-                <div class="header-misc">
-
-
-                    <div class="header-misc" style="display: none">
-
-
-                        <!-- info
-                        ============================================= -->
-                        <div id="top-cart" class="header-misc-icon d-none d-sm-block">
-                            <div class="entry-meta">
-                                <ul>
-                                    <li><a href="#" id="top-cart-trigger"><i class="icon-user"></i> kimjintae</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="top-cart-content">
-                                <div class="top-cart-title">
-                                    <h4>안녕하세요 kimjintae님</h4>
+                <div class="header-misc" >
+                    <div sec:authorize="!isAuthenticated()">
+                    <div class="inline-block ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active">
+                        <button class="button button-border button-rounded button-leaf" data-toggle="modal"
+                                data-target="#myModal" value="login">Login
+                        </button>
+                    </div><!-- #top-search end -->
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="header-misc">
+                            <!-- info
+                            ============================================= -->
+                            <div id="top-cart" class="header-misc-icon d-none d-sm-block">
+                                <div class="entry-meta">
+                                    <ul id="top-social">
+                                        <li>
+                                            <a href="#" class="si-email3 " id="top-cart-trigger">
+                                                <span class="ts-icon">
+                                                    <i class="icon-user"></i>
+                                                </span>
+                                                <span class="ts-text" th:text="${session.m2.getUsername}"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="top-cart-items">
-                                    <div class="top-cart-item">
-                                        <div class="testi-image">
-                                            <a href="#"><img src="resources/userUpload/DEFAULT.png"
-                                                             alt="Customer Testimonails"></a>
-                                        </div>
-                                        <div class="top-cart-item-desc">
-                                            <div class="top-cart-item-desc-title">
-                                                <h5>swcide@gmail.com</h5>
+                                <div class="top-cart-content">
+                                    <div class="top-cart-title">
+                                        <h4>안녕하세요<span th:text="${session.m2.getUsername}"></span> 님!</h4>
+                                    </div>
+                                    <div class="top-cart-items">
+                                        <div class="top-cart-item">
+                                            <div class="top-cart-item-desc">
+                                                <div class="top-cart-item-desc-title">
+                                                    <h5 th:text="${session.m2.getEmail}"></h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="top-cart-action">
+                                        <a href="" class="social-icon si-rounded si-cloudapp" title="Cloudapp">
+                                            <i class="icon-line2-settings"></i>
+                                            <i class="icon-line2-settings"></i>
+                                        </a>
+                                        <a href="/logout" class="button button-mini button-circle button-red">
+                                            <i class="icon-off"></i>log out
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="top-cart-action">
-                                    <a href="myInfo.do" class="social-icon si-rounded si-cloudapp" title="Cloudapp">
-                                        <i class="icon-line2-settings"></i>
-                                        <i class="icon-line2-settings"></i>
-                                    </a>
-                                    <a href="logout.do" class="button button-mini button-circle button-red"><i
-                                            class="icon-off"></i>log out</a>
-                                </div>
-                            </div>
-                        </div><!-- #top-cart end -->
-
+                            </div><!-- #top-cart end -->
+                        </div>
                     </div>
-                    <div class="header-misc">
-
-                        <div class="inline-block ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active">
-                            <button class="button button-border button-rounded button-leaf" data-toggle="modal" data-target="#myModal" value="login">Login</button>
-                        </div><!-- #top-search end -->
-
-
-
-
-                    </div>
-
                 </div>
-
 
                 <div id="primary-menu-trigger">
                     <svg class="svg-trigger" viewBox="0 0 100 100">
@@ -84,34 +85,29 @@
                         <path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path>
                     </svg>
                 </div>
-
-
                 <!-- Primary Navigation
                 ============================================= -->
                 <nav class="primary-menu">
-
                     <ul class="menu-container">
                         <li class="menu-item">
                             <a class="menu-link" th:href="@{/main}">
-                            <div>Home</div>
+                                <div>Home</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a class="menu-link" th:href="@{/board}">
-                            <div>Board</div>
+                            <a class="menu-link" th:href="@{/board/view}">
+                                <div>Board</div>
                             </a>
                         </li>
-
-
                     </ul>
-
                 </nav><!-- #primary-menu end -->
             </div>
         </div>
     </div>
     <div class="header-wrap-clone" style="height: 61px;"></div>
     <!-- head warp end -->
-    <div class="modal fade show" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
+    <div class="modal fade show" id="myModal" tabindex="-1" aria-labelledby="myModalLabel"
+         style="display: none; padding-right: 17px;" aria-modal="true" role="dialog">
         <div class="modal-dialog">
             <div class="modal-body">
                 <div class="modal-content">
@@ -120,32 +116,29 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
-
                         <div class="well well-lg mb-0">
-                            <form class="row" action="login.do" method="post">
-
+                            <form class="row" accept-charset="UTF-8" role="form" action="/login" method="post">
                                 <div class="col-12">
-                                    <h3>Login to your Account</h3>
+                                    <h3>Login</h3>
                                 </div>
-
                                 <div class="col-12 form-group">
                                     <label for="login-form-username">ID:</label>
                                     <input type="text" id="login-form-username" name="id" value="" class="form-control">
                                 </div>
-
                                 <div class="col-12 form-group">
                                     <label for="login-form-password">Password:</label>
-                                    <input type="password" id="login-form-password" name="pwd" value="" class="form-control">
+                                    <input type="password" id="login-form-password" name="password" value=""
+                                           class="form-control">
                                 </div>
-
                                 <div class="col-12 form-group">
-                                    <button th:href="@{/user/signup}" class="btn btn-secondary m-0 float-right" id="login-form-submit" name="login-form-submit" value="login" style="width: 100% ;height: 63px">Login</button>
+                                    <button class="btn btn-secondary m-0 float-right" id="login-form-submit"
+                                            style="width: 100% ;height: 63px">Login
+                                    </button>
                                 </div>
-
                             </form>
                         </div>
                         <div class="text-center">
-                            <a href="#" >
+                            <a href="#" onclick="kakaoLogin();">
                                 <img src="/images/kakao_login_large_wide.png" alt="ss">
                                 <!--                                <i class="icon-aim"></i>-->
                             </a>
@@ -153,7 +146,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <a th:href="@{/user/signup}" type="button" class="float-md-left btn btn-primary">Sign In</a>
+                        <a th:href="@{/member/signup}" type="button" class="float-md-left btn btn-primary">Sign In</a>
                         <button type="button" class="float-right btn btn-secondary" data-dismiss="modal">Close</button>
 
                     </div>
@@ -161,6 +154,25 @@
             </div>
         </div>
     </div>
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    <script>
+        $('#top-cart').on('click', function(){
+            $('#top-cart').toggleClass('top-cart-open');
+        });
+        $('body').on('click', function(e){
+
+            $('top-cart').removeClass('top-cart-open');
+
+        });
+        $($body).on('click', function(e){
+
+            $('top-cart').removeClass('top-cart-open');
+
+        });
+
+
+    </script>
 </header>
 
 

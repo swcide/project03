@@ -1,0 +1,112 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{home/layout/layout}"
+>
+
+<head>
+
+  <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+
+</head>
+<div layout:fragment="content">
+  <section id="page-title" class="page-title-parallax page-title-dark"
+           style="background-image: url('/images/write_bg.jpg'); background-size: cover; padding: 120px 0px; background-position: 0px -200.237px;" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;">
+    <div class="container clearfix">
+      <h1>WRITE</h1>
+    </div>
+  </section>
+  <section class="content">
+    <div class="content-wrap">
+      <div class="container clearfix">
+        <div class="write">
+
+            <th:block>
+              <input type="hidden" id="username" th:value="${session.m2.username}">
+              <input type="hidden" id="userId" th:value="${session.m2.userId}">
+            </th:block>
+            <table class="table "style="text-align: center; border: 1px solid #dddddd">
+              <thead>
+              <tr>
+                <th colspan=""	style="background-color: #eeeeee; text-align: center;">
+                  이쁜 말 쓰세요 ㅡㅡ!
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+
+                  <input type="text" id="title" class="form-control" placeholder="글 제목" name="title" maxlength="50"/>
+                </td>
+              </tr>
+              <tr >
+                <td>
+                  <textarea id="editor" class="form-control" placeholder="글 내용" name="content" maxlength="2048" style="height: 350px;"></textarea>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+<!--            <input class="form-control-file" type="file" name="uploadFile">-->
+            <button  onclick="boardwrite()" class="button button-border button-thin button-rounded button-fill button-aqua button-reveal  text-right float-right"><i class="icon-line-arrow-right"></i><span>글쓰기</span></button>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+  let editor;
+
+  ClassicEditor
+          .create(document.querySelector( '#editor' ), {
+            language: 'ko'
+          })
+          .then( newEditor => {
+            editor = newEditor;
+          } )
+          .catch( error => {
+            console.error( error );
+          } );
+
+
+  function boardwrite() {
+    let username = $('#username').val()
+    let title = $('#title').val()
+    let contents = editor.getData();
+    let userId = $('#userId').val()
+    if (title == '') {
+      alert('제목을 적어주세요!')
+      return
+    } else if (contents == '') {
+      alert('내용을 작성해주세요!')
+      return
+    }
+    console.log(username)
+    console.log(title)
+    console.log(userId)
+    console.log(contents)
+    let data = {
+      'userId': userId,
+      'username': username,
+      'title': title,
+      'contents': contents
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/board/write',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (response) {
+        alert("게시물 작성이 완료 되었습니다!")
+        window.history.back()
+      }
+    })
+  }
+</script>
+
+
+
+</div>
+</html>

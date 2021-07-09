@@ -1,20 +1,96 @@
 <!DOCTYPE html>
 <html lang="ko"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{home/layout/layout}"
->
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <!--    thymeleaf layout dialect가 contents페이지의 head태그를 layout의 head태그에 자동으로 추가해준다. -->
-    <!--    필요힌 css, script 추가영역 -->
-    <style>
 
 
-    </style>
 </head>
-
+<!--<input type="hidden" name="author" class="form-control" id="inputAuthor" th:value="${username}">-->
 <div layout:fragment="content">
+    <section id="page-title" class="page-title-parallax page-title-dark"
+             style="background-image: url('/images/home_bg.gif'); background-size: cover; padding: 120px 0px; background-position: 0px -200.237px;"
+             data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;">
+        <div class="container clearfix">
+            <h1>HOME</h1>
+        </div>
+    </section>
 
+    <section id="content">
+        <div class="content-wrap">
+            <div class="container clearfix">
+             <!-- Portfolio Items
+                ============================================= -->
+                <div id="portfolio" class="portfolio row grid-container gutter-30">
+
+                    <!-- Portfolio Item: Start -->
+                    <article class="portfolio-item col-md-4 col-sm-6 col-12 pf-media pf-icons">
+                        <!-- Grid Inner: Start -->
+                        <div class="grid-inner">
+                            <div class="portfolio-image">
+                                <a href="portfolio-single.html">
+                                    <img src="/images/11.gif" alt="Open Imagination">
+                                </a>
+
+                                <!-- Overlay: Start -->
+                                <div class="bg-overlay">
+                                    <div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+                                        <div class="d-flex">
+                                            <a href="/images/11.gif" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="image" title="Image"><i class="icon-line-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+                                </div>
+                                <!-- Overlay: End -->
+                            </div>
+                            <!-- Image: End -->
+                        </div>
+                        <!-- Grid Inner: End -->
+                    </article>
+                    <!-- Portfolio Item: End -->
+
+                    <article class="portfolio-item col-md-4 col-sm-6 col-12 pf-illustrations">
+                        <div class="grid-inner">
+                            <div class="portfolio-image">
+                                <a href="portfolio-single.html">
+                                    <img src="/images/cat.gif" alt="Locked Steel Gate">
+                                </a>
+
+                                <div class="bg-overlay">
+                                    <div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+                                        <div class="d-flex">
+                                            <a href="/images/cat.gif" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="image" title="Image"><i class="icon-line-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="portfolio-item col-md-4 col-sm-6 col-12 pf-illustrations">
+                        <div class="grid-inner">
+                            <div class="portfolio-image">
+                                <a href="portfolio-single.html">
+                                    <img src="/images/13.gif" alt="Locked Steel Gate">
+                                </a>
+
+                                <div class="bg-overlay">
+                                    <div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+                                        <div class="d-flex">
+                                            <a href="/images/13.gif" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="image" title="Image"><i class="icon-line-plus"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div><!-- #portfolio end -->
+            </div>
+        </div>
+    </section><!-- #content end -->
 
 </div>
 </html>
