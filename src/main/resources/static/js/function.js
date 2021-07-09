@@ -728,8 +728,8 @@ var SEMICOLON = SEMICOLON || {};
 				} else {
 					SEMICOLON.header.removeStickyness();
 					if( headerSizeCustom ){
-						logo.find('img').css({ 'height': Number( defLogoH ) });
-						SEMICOLON.header.menuItemsSpacing( defMenuP );
+						// logo.find('img').css({ 'height': Number( defLogoH ) });
+						// SEMICOLON.header.menuItemsSpacing( defMenuP );
 					}
 				}
 			}

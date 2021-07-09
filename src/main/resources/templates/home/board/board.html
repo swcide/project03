@@ -1,0 +1,60 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{home/layout/layout}"
+>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+
+    <script src="/js/board.js"></script>
+
+</head>
+
+<div layout:fragment="content">
+
+
+    <section id="page-title" class="page-title-parallax page-title-dark"
+             style="background-image: url('/images/13.gif'); background-size: cover; padding: 120px 0px; background-position: 0px -200.237px;" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;">
+        <div class="container clearfix">
+            <h1>BOARD</h1>
+        </div>
+    </section>
+    <section id="content">
+        <div class="content-wrap">
+            <div class="container clearfix">
+                <div class="row gutter-40 col-mb-80">
+                    <!-- Post Content
+                    ============================================= -->
+                    <div class="postcontent col-lg-11">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="title">제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="tbody">
+
+
+                            </tbody>
+                        </table>
+                            <th:block sec:authorize="isAuthenticated()">
+                            <a th:href="@{/board/write/view}" class="button button-3d  button-rounded button-leaf button-light" style="float: right; margin-bottom: 25px">글쓰기</a>
+                            </th:block>
+                        <div class="line"></div>
+                        <div id="pagination">
+                        </div>
+
+                    </div><!-- .postcontent end -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+</html>
